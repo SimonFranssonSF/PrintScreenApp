@@ -19,6 +19,8 @@
 #include "QJsonDocument"
 #include "QJsonArray"
 #include "QClipboard"
+#include "QDesktopWidget"
+#include "QWindow"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -68,12 +70,19 @@ void MainWindow::mouseSelect(QPoint x, QPoint y) {
 
 // Screenshot taken, that is, the hotkey alt + x has been pressed, grabs the screenshot and shows it in a fullscreen qpaintLabel.
 void MainWindow::screenshotTaken() {
+    // which screen are we working with
+    QPoint globalCursorPos = QCursor::pos();
+    int activeScreen = qApp->desktop()->screenNumber(globalCursorPos);
+
     sc = scm->takeScreenshot();
     QImage a = sc.toImage();
     QImage a2  = a.scaled(a.width(),a.height(), Qt::KeepAspectRatio);
     QPixmap a3 = QPixmap::fromImage(a2);
+
+
     img->setPixmap(a3);
     img->show();
+    img->windowHandle()->setScreen(qApp->screens()[activeScreen]);
     img->adjustSize();
     img->showFullScreen();
 }
@@ -95,7 +104,7 @@ void MainWindow::sendRequest() {
     request.setHeader(QNetworkRequest::ContentTypeHeader,
         "application/x-www-form-urlencoded");
     request.setRawHeader("Authorization",
-        "ADD YOURSELF");
+        "Client-ID ADD YOUR OWN");
     manager->post(request, byteArray);
 }
 

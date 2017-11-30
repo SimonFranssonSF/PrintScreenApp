@@ -4,8 +4,12 @@
 #include "QPaintEvent"
 #include "QDebug"
 #include "specialrubberband.h"
+#include "QPaintEvent"
+#include "QApplication"
+#include "QDesktopWidget"
+#include "QScreen"
 
-QPaintLabel::QPaintLabel() : QLabel() {
+QPaintLabel::QPaintLabel(QWidget* p) : QLabel(p) {
     rubberBand = new SpecialRubberBand(QRubberBand::Rectangle, this);
     rubberBand->setStyleSheet("selection-background-color: rgba(255, 255, 255, 128);border-color: red;");
     this->setWindowFlags(this->windowFlags() | Qt::Window);
@@ -28,3 +32,20 @@ void QPaintLabel::mouseReleaseEvent(QMouseEvent *event) {
     rubberBand->hide();
 }
 
+void QPaintLabel::paintEvent(QPaintEvent *event) {
+    QLabel::paintEvent(event);
+    QPainter p(this);
+    p.setBrush(QBrush(QColor(0,0,0,60)));
+    p.setPen(QPen(QColor(0,0,0,60)));
+
+    // which screen are we working with
+    QPoint globalCursorPos = QCursor::pos();
+    int activeScreen = qApp->desktop()->screenNumber(globalCursorPos);
+    QScreen* screen = QGuiApplication::screens().at(activeScreen);
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+
+    p.drawRect(0,0,width, height);
+
+}

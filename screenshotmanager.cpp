@@ -5,7 +5,6 @@
 #include "QScreen"
 #include "QGuiApplication"
 #include <QtWidgets>
-#include "curl.h"
 #include "QDebug"
 //#include "cpprest/http_client.h"
 //#include "cpprest/filestream.h"
@@ -13,10 +12,17 @@
 #include "qnetwork.h"
 #include "QtNetwork/QNetworkReply"
 #include "QtNetwork/QNetworkAccessManager"
-
+#include "QDesktopWidget"
+#include "QWindow"
 
 QPixmap ScreenshotManager::takeScreenshot() {
-    QScreen *screen = QGuiApplication::primaryScreen();
+    // which screen are we working with
+    QPoint globalCursorPos = QCursor::pos();
+    int activeScreen = qApp->desktop()->screenNumber(globalCursorPos);
+    qDebug() << activeScreen;
+
+    //QScreen *screen = QGuiApplication::primaryScreen();
+    QScreen* screen = QGuiApplication::screens().at(activeScreen);
     QPixmap originalPixmap = screen->grabWindow(0);
     return originalPixmap;
 }

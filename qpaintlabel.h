@@ -4,11 +4,13 @@
 #include "QWidget"
 #include "QLabel"
 #include "QRubberBand"
+#include "QPaintEvent"
+#include "QPainter"
 
 class QPaintLabel : public QLabel {
     Q_OBJECT
 public:
-    QPaintLabel();
+    QPaintLabel(QWidget* p = 0);
     QRubberBand* rubberBand;
     QPoint origin;
 private:
@@ -17,7 +19,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
-    //void paintEvent(QPaintEvent* event);
+    virtual void paintEvent(QPaintEvent* event);
 signals:
     void notifyMouse(QPoint origin, QPoint lastPos);
 };

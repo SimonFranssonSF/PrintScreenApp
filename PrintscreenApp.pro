@@ -51,38 +51,10 @@ FORMS += \
         mainwindow.ui
 
 
-INCLUDEPATH += C:/Users/Frans/Desktop/curl-7.56.1/include
-INCLUDEPATH += C:/Users/Frans/Desktop/curl-7.56.1/include/curl
-INCLUDEPATH += C:/Users/Frans/Desktop/curl-7.56.1/lib
-INCLUDEPATH += C:/Users/Frans/Desktop/cmake/lib
-INCLUDEPATH += C:\Users\Frans\Desktop\cmake\lib\libcurl.dir
-
-
-
-
-LIBS += -L/C:/Users/Frans/Desktop/libcurl/I386/ \
-     -LIBCURLd \
-
-LIBS += -L/C:/Users/Frans/Desktop/libcurl/I386/ \
-     -LIBCURL \
-
-LIBS += -L/C:/Users/Frans/Desktop/libcurl/IA64/ \
-     -LIBCURL \
-
-LIBS += -L/C:/Users/Frans/Desktop/cmake/lib/Debug/ \
-     -FAN \
-
-
-win32:CONFIG(release, debug|release): LIBS += -LC:/Users/Frans/Desktop/cmake/lib/release/ -lFAN
-else:win32:CONFIG(debug, debug|release): LIBS += -LC:/Users/Frans/Desktop/cmake/lib/debug/ -lFAN
-else:unix: LIBS += -LC:/Users/Frans/Desktop/cmake/lib/ -lFAN
-
-INCLUDEPATH += C:/Users/Frans/Desktop/curl-7.56.1/include/curl
-DEPENDPATH += C:/Users/Frans/Desktop/curl-7.56.1/include/curl
-
 RESOURCES += \
     resources.qrc
 
+win32: RC_ICONS += ScreenshotApp.ico
 
 
 
