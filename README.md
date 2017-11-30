@@ -11,7 +11,6 @@
 * Make it work on secondary screens
 * Make compatible on other systems than windows
 * Implement autostart
-* Remove the app completely from the windows taskbar so that it is all tranparent
 
 Openssl needed.
 
