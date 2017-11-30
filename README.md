@@ -7,9 +7,6 @@
 **Mouse selection done** - when you let go of the mousebutton while selecting, the image is uploaded to imgur, the url to the img is then automatically copied to clipboard, and could be used by pasting it anywhere (for example using ctrl + v).
 
 #To fix
-* Giving better visual feedback when a screenshot is taken
-* Make it work on secondary screens
-* Make compatible on other systems than windows
 * Implement autostart
 
 Openssl needed.
