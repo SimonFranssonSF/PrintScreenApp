@@ -13,4 +13,4 @@ Openssl needed.
 
 Client-id from api.imgur needed.
 
-Curl's not needed even if it is imported in the .pro file, QtNetwork has been used.
+Installer made.
